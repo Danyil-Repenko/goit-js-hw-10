@@ -14,13 +14,45 @@ const refs = {
 refs.input.addEventListener("input", debounce(onInput, DEBOUNCE_DELAY));
 
 function onInput(event) {
-    fetchCountries(event.target.value)
+    const inputValue = event.target.value.trim();
+
+    if (!inputValue) {
+        console.log('порожньо');
+        refs.countryList.innerHTML = '';
+        refs.countryInfo.innerHTML = '';
+        return;
+    }
+
+    fetchCountries(inputValue)
         .then(data => {
-            console.log(data);
+            showCountreis(data);
         })
         .catch(error => {
-            console.log(error);
+            refs.countryList.innerHTML = '';
+            refs.countryInfo.innerHTML = '';
+            Notify.failure("Oops, there is no country with that name");
         });
-};
+}
 
-
+function showCountreis(data) {
+    if (data.length === 1) {
+        console.log(data);
+        refs.countryList.innerHTML = '';
+    } else if (data.length >= 2 && data.length <= 10) {
+        const markup = data
+            .map((country) => {
+                return `
+          <li class="country-list_item">
+            <div class="country-list_flag">
+            <img class="image-item" src="${country.flags.svg}" alt="flag of ${country.name.official}">
+            </div>
+            <p class="country-list_name">${country.name.official}</p>
+          </li>
+      `;
+            })
+            .join("");
+        refs.countryList.innerHTML = markup;
+    } else {
+        Notify.info('Too many matches found. Please enter a more specific name.')
+    }
+}
