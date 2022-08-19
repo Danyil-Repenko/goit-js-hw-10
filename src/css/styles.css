@@ -19,28 +19,44 @@ body {
   margin-bottom: 16px;
 }
 
+p {
+  margin: 0;
+}
+
 .country-list {
   list-style: none;
   padding-left: 0;
+  margin: 0;
 }
 
-.country-list_item {
+.country-list_item,
+.country-info_head {
   display: flex;
   align-items: center;
+}
+
+.country-info_head {
+  margin-bottom: 15px;
+}
+
+.country-info_name {
+  font-weight: bold;
+  font-size: 28px;
 }
 
 .country-list_item:not(:last-child) {
   margin-bottom: 15px;
 }
 
-.country-list_flag {
-  width: 30px;
-  height: auto;
-  margin-right: 10px;
+.info-text:not(:last-child) {
+  margin-bottom: 10px;
 }
 
-.country-list_name {
-  margin: 0;
+.country-list_flag,
+.country-info_flag {
+  width: 35px;
+  height: auto;
+  margin-right: 10px;
 }
 
 .image-item {
