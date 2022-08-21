@@ -65,7 +65,6 @@ function matchMarkup(data) {
           </div >
         `;
         })
-        .join("");
 }
 
 function loadTheMatches(data) {
